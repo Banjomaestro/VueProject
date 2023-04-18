@@ -2,12 +2,12 @@
   <div id="app">
 
     <SpaceNavBar/>
+    <PhotoCard id="image-of-the-day"/>
     <PhotoCard/>
-    <PhotoCard/>
-
-    <button @click="sortAsteroids()">Sort by Distance</button>
-
-    <AsteroidsTable/>
+    <AsteroidsTable id="asteroids"/>
+    <ExoplanetComponent id="exoplanets">
+      
+    </ExoplanetComponent>
     <FooterComp/>
   </div>
 </template>
@@ -18,6 +18,7 @@ import SpaceNavBar from "./components/SpaceNavBar.vue";
 import AsteroidsTable from "./components/AsteroidsTable.vue"
 import PhotoCard from "./components/PhotoCard.vue"
 import FooterComp from "./components/FooterComp.vue"
+import ExoplanetComponent from "./components/MarsRoverPhotos.vue";
 
 export default {
     data() {
@@ -46,7 +47,7 @@ export default {
       });
     },
   },
-    components: { SpaceNavBar, AsteroidsTable, PhotoCard, FooterComp }
+    components: { SpaceNavBar, AsteroidsTable, PhotoCard, FooterComp, ExoplanetComponent }
 };
 </script>
 

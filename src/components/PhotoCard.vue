@@ -7,7 +7,7 @@
       <p>{{ explanation }}</p>
     </div>
     <div v-else>
-      <p>Loading...</p>
+      <img src="../assets/loader.gif"/>
     </div>
   </div>
 </template>

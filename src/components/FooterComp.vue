@@ -1,9 +1,7 @@
 <template>
-<div class="space">
 	<footer>
-		<h4>Built by Benjamin Amrani</h4>
+		<h4>Built by Benjamin Amrani using the NASA API</h4>
 	</footer>
-</div>
 </template>
 
 <script>

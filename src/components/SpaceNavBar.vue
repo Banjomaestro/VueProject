@@ -6,7 +6,8 @@
         </a>
         <a class="navbar-item" href="#image-of-the-day">Image of the day</a>
         <a class="navbar-item" href="#asteroids">Asteroids</a>
-        <a class="navbar-item" href="#exoplanets">Martian pictures</a>
+        <a class="navbar-item" href="#cme">Coronal Mass Ejection</a>
+        <a class="navbar-item" href="#marsPics">Martian pictures</a>
       
   </nav>
 </template>

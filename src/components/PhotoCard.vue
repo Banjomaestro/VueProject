@@ -1,14 +1,28 @@
 <template>
   <div class="space">
+    <div v-if="savedImages.length > 0">
+      <h2>Saved Images</h2>
+      <div class="saved-images">
+        <div v-for="(image, index) in savedImages" :key="index" class="saved-image">
+          <img :src="image.url" />
+          <p>{{ image.title }}</p>
+          <p>{{ image.explanation }}</p>
+          <button @click="deleteImage(index)">Delete Image</button>
+        </div>
+      </div>
+    </div>
     <h1>Astronomy Picture of the Day</h1>
+
     <div v-if="image">
-      <img :src="image" :alt="title" />
-      <p>{{ title }}</p>
-      <p>{{ explanation }}</p>
+      <img :src="image.url" :alt="image.title" />
+      <p>{{ image.title }}</p>
+      <p>{{ image.explanation }}</p>
+      <button @click="downloadImage">Save Image</button>
     </div>
     <div v-else>
       <img src="../assets/loader.gif"/>
     </div>
+    <button @click="getNewImage">New Image</button>
   </div>
 </template>
 
@@ -18,25 +32,45 @@ import axios from "axios";
 export default {
   data() {
     return {
-      image: "",
-      title: "",
-      explanation: "",
+      image: null,
+      savedImages: []
     };
   },
   mounted() {
-    axios
-      .get(
-        "https://api.nasa.gov/planetary/apod?api_key=WPtOXNXgwu35UIhBUg8sgxmVlneZKDYL5UAYgc3n&count=1&thumbs=true"
-      )
-      .then((response) => {
-        this.image = response.data[0].url;
-        this.title = response.data[0].title;
-        this.explanation = response.data[0].explanation;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const savedImages = localStorage.getItem('savedImages');
+    if (savedImages) {
+      this.savedImages = JSON.parse(savedImages);
+    }
+
+    this.getNewImage();
   },
+  methods: {
+    getNewImage() {
+      axios
+        .get(
+          "https://api.nasa.gov/planetary/apod?api_key=WPtOXNXgwu35UIhBUg8sgxmVlneZKDYL5UAYgc3n&count=1&thumbs=true"
+        )
+        .then((response) => {
+          const newImage = {
+            url: response.data[0].url,
+            title: response.data[0].title,
+            explanation: response.data[0].explanation
+          };
+          this.image = newImage;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    downloadImage() {
+      this.savedImages.push(this.image);
+      localStorage.setItem('savedImages', JSON.stringify(this.savedImages));
+    },
+    deleteImage(index) {
+      this.savedImages.splice(index, 1);
+      localStorage.setItem('savedImages', JSON.stringify(this.savedImages));
+    }
+  }
 };
 </script>
 
@@ -72,5 +106,34 @@ div {
   line-height: 1.5;
   text-align: justify;
   margin-bottom: 24px;
+}
+
+.saved-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.saved-image {
+  max-width: 100%;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #031660;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #4778b4;
 }
 </style>

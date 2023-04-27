@@ -3,11 +3,11 @@
 
     <SpaceNavBar/>
     <PhotoCard id="image-of-the-day"/>
-    <PhotoCard/>
     <AsteroidsTable id="asteroids"/>
-    <ExoplanetComponent id="exoplanets">
-      
-    </ExoplanetComponent>
+    <CME id = "cme"/>
+    <MarsRoverPhotos id="marsPics"/>
+
+
     <FooterComp/>
   </div>
 </template>
@@ -18,7 +18,10 @@ import SpaceNavBar from "./components/SpaceNavBar.vue";
 import AsteroidsTable from "./components/AsteroidsTable.vue"
 import PhotoCard from "./components/PhotoCard.vue"
 import FooterComp from "./components/FooterComp.vue"
-import ExoplanetComponent from "./components/MarsRoverPhotos.vue";
+import MarsRoverPhotos from "./components/MarsRoverPhotos.vue";
+import CME from "./components/CMEComp.vue";
+
+
 
 export default {
     data() {
@@ -47,7 +50,7 @@ export default {
       });
     },
   },
-    components: { SpaceNavBar, AsteroidsTable, PhotoCard, FooterComp, ExoplanetComponent }
+    components: { SpaceNavBar, AsteroidsTable, PhotoCard, FooterComp, MarsRoverPhotos, CME }
 };
 </script>
 

@@ -7,9 +7,9 @@
         <option value="ZAName">Name from Z à A</option>
         <option value="MissDistance">Miss Distance</option>
         <option value="Diameter">Diameter</option>
-
+        <option value="Date">Most recent to least recent</option>
       </select>
-      <div v-if="asteroids">
+      <div v-if="asteroidsOrganizedData">
         <h2>Asteroids which approached Earth today</h2>
         <ul>
           <li v-for="asteroid in asteroidsOrganizedData" :key="asteroid.neo_reference_id">
@@ -44,6 +44,8 @@
       sortedAsteroids.sort((a, b) => a.close_approach_data[0].miss_distance.kilometers.localeCompare(b.close_approach_data[0].miss_distance.kilometers));
     }else if (this.asteroidsSortType === "Diameter") {
       sortedAsteroids.sort((a, b) => a.estimated_diameter.meters.estimated_diameter_min - b.estimated_diameter.meters.estimated_diameter_min);
+    }else if (this.asteroidsSortType === "Date") {
+      sortedAsteroids.sort((a, b) => b.close_approach_data[0].close_approach_date_full.localeCompare(a.close_approach_data[0].close_approach_date_full));
     }
     return sortedAsteroids;
   }
